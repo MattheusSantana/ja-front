@@ -1,10 +1,17 @@
+import React from 'react';
+
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from "./pages/Login";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Hello world</h1>
-      </header>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Login/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
