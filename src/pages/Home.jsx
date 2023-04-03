@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import Project from '../components/Project.js';
 import { getProjects } from '../services/api.js';
 
 const Home = () => {
@@ -9,11 +10,14 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await getProjects();
-      setProjects(response.data);
+      setProjects(response.data.map(project => {
+        return {...project, isEditing: false}
+      }));
       setLoading(false);
     })();
   }, []);
 
+  
 
   if(loading) {
       return <div>Loading Projects...</div>
@@ -36,17 +40,7 @@ const Home = () => {
           </thead>
           {projects.map((project) => (
           <tbody>
-            <tr>
-              <td>{project.title}</td>
-              <td>{project.zip_code}</td>
-              <td>{project.cost}</td>
-              <td>{project.deadline}</td>
-              <td>
-                <button onClick={e => this.edit (project)}>Edit</button>
-                <button onClick={e => this.done (project)}>Done</button>
-                <button onClick={e => this.delete (project)}>Delete</button>
-              </td>
-            </tr>
+            <Project { ...project}></Project>
           </tbody>
            ))}
           </table>
