@@ -7,3 +7,7 @@ export const api = axios.create({
 export const loginService = async (username, password) => {
     return api.post("/auth", {username, password});
 };
+
+export const getProjects = async () => {
+    return api.get("/projects");
+};

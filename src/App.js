@@ -24,7 +24,6 @@ function App() {
     }
 
     if (!authenticated) {
-      console.log("entrou vou redirecionar");
       return <Navigate to="/" />;
     }
 

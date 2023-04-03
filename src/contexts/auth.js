@@ -22,10 +22,10 @@ export const AuthenticatorProvider =  ({children}) => {
   }, []);
 
 
-  const login = async (email, password) => {
+  const login = async (username, password) => {
 
     try {
-        const response = await loginService(email, password);
+        const response = await loginService(username, password);
 
         if(response.status === 200){
 
@@ -36,7 +36,7 @@ export const AuthenticatorProvider =  ({children}) => {
           localStorage.setItem('token', token);
 
           api.defaults.headers.Authorization = `Bearer ${token}`;
-
+          api.defaults.headers.username = username;
           navigate("/home");
 
         }
