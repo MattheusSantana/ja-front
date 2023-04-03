@@ -19,7 +19,13 @@ const SearchComponent = () => {
           return alert("Project not found");
     
         }
-      }
+        
+        event.target.reset();
+    };
+
+    const clearSearch = () => {
+        setProject(null);
+    }
 
 
 
@@ -29,8 +35,9 @@ const SearchComponent = () => {
         
     <h2>Search project</h2>
     <div>
-      <input type="text" name='id' placeholder='enter project id' onChange={(e) => setSearchProjectId(e.target.value)}/>
+      <input type="text" name='searchProjectId' placeholder='enter project id' onChange={(e) => setSearchProjectId(e.target.value)}/>
       <button type="text">search</button>
+      <button type="button" onClick={clearSearch}>clear</button>
     </div>
 
     {project ? 
@@ -38,9 +45,7 @@ const SearchComponent = () => {
             <thead>
                 <tr>
                     <th>Project</th>
-                    <th>Country</th>
-                    <th>State</th>
-                    <th>City</th>
+                    <th>Location</th>
                     <th>cost</th>
                     <th>deadline</th>
                 </tr>
@@ -49,9 +54,7 @@ const SearchComponent = () => {
             <tbody>
                 <tr>
                     <td>{project.title}</td>
-                    <td>{project.country}</td>
-                    <td>{project.state}</td>
-                    <td>{project.city}</td>
+                    <td>{project.country} - {project.state} - {project.city}</td>
                     <td>{project.cost}</td>
                     <td>{project.deadline}</td>
                 </tr>
