@@ -7,12 +7,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   
 
-  console.log("auth", AuthContext);
   const { login, loginMessage } = useContext(AuthContext);
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('login', typeof login);
     login(userName, password);
   };
 
