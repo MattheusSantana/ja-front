@@ -1,15 +1,18 @@
 import React, {useContext, useState} from 'react'
-import { AuthContext } from '../contexts/auth.js'
+import { AuthContext } from '../contexts/auth.js';
 
 
-const Signin = () => {
+const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
- 
-  const { login, loginMessage} = useContext(AuthContext);
+  
+
+  console.log("auth", AuthContext);
+  const { login, loginMessage } = useContext(AuthContext);
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log('login', typeof login);
     login(userName, password);
   };
 
@@ -34,4 +37,4 @@ const Signin = () => {
     </div>
   )
 }
-export default Signin;
+export default Login;

@@ -22,10 +22,10 @@ export const AuthenticatorProvider =  ({children}) => {
   }, []);
 
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
 
     try {
-        const response = await loginService(username, password);
+        const response = await loginService(email, password);
 
         if(response.status === 200){
 
