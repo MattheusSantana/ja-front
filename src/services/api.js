@@ -27,8 +27,15 @@ export const searchProjectById = async (projectId) => {
 };
 
 export const deleteProject = async (projectId) => {
+    setUsernameHeader();
     return api.delete(`/projects/${projectId}`);
 };
+
+export const doneProject = async (projectId) => {
+    setUsernameHeader();
+    return api.patch(`/projects/${projectId}/done`);
+};
+
 
 const setUsernameHeader = () => {
     const loggedUser = localStorage.getItem('loggedUser');
