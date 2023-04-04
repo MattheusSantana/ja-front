@@ -18,6 +18,7 @@ export const getProjects = async () => {
 };
 
 export const createProject = async (project) => {
+    setUsernameHeader();
     return api.post("/project", project);
 };
 

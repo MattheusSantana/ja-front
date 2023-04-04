@@ -54,7 +54,7 @@ const SearchComponent = () => {
             <tbody>
                 <tr>
                     <td>{project.title}</td>
-                    <td>{project.country} - {project.state} - {project.city}</td>
+                    <td>{project.state} - {project.city}</td>
                     <td>{project.cost}</td>
                     <td>{project.deadline}</td>
                 </tr>

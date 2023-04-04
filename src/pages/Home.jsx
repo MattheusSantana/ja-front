@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import EditableRow from '../components/EditableRow.jsx';
 import ReadOnlyRow from '../components/ReadOnlyRow.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
@@ -22,6 +23,8 @@ const Home = () => {
     cost: 0,
     deadline: ''
   });
+
+  const navigate = useNavigate();
 
   
   const handleEditFormChange = (event) => {
@@ -153,55 +156,44 @@ const Home = () => {
   if(loading) {
       return <div>Loading Projects...</div>
   }
+      
+  const navigateToCreateProject = () => {
+    navigate("/project");
+  }
 
   return (
     <>
-        <h2> Add project</h2>
-        <form onSubmit={handleAddFormSubmit}>
-          <input type="text" name='title' placeholder='Title' onChange={handleAddFormChange}/>
-          <input type="text" name='zip_code' placeholder='zip code' onChange={handleAddFormChange}/>
-          <input type="text" name='cost' placeholder='cost' onChange={handleAddFormChange}/>
-          <input type="text" name='deadline' placeholder='deadline' onChange={handleAddFormChange}/>
-          <button type='submit'>Add</button>
-        </form>
+      <div style={{float: "right"}}>
+        <button onClick={navigateToCreateProject}>New</button>
+        <button >search</button>
+      </div>
+      <form onSubmit={handleEditFormSubmit}>
+       <table>
+        <thead>
+           <tr>
+             <th>Project</th>
+             <th>zip code</th>
+             <th>cost</th>
+             <th>deadline</th>
+             <th>Action</th>
+            </tr>
+        </thead>
+        {projects.map((project) => (
+          <tbody key={project.id}>
+            {editProjectId === project.id ? (
+              <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick}/>
 
-        <br/>
-        <br/>
-        <form onSubmit={handleEditFormSubmit}>
-          <table>
-            <thead>
-                <tr>
-                  <th>Project</th>
-                  <th>zip code</th>
-                  <th>cost</th>
-                  <th>deadline</th>
-                  <th>Action</th>
-                </tr>
-            </thead>
-            {projects.map((project) => (
-              <tbody key={project.id}>
-                {editProjectId === project.id ? (
-                  <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick}/>
-
-                ) : (
-                  <ReadOnlyRow project={project} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} handleDoneClick={handleDoneClick}/>
-                )}
-
-
-            
-            </tbody>
-            ))}
-            </table>
+            ) : (
+              <ReadOnlyRow project={project} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} handleDoneClick={handleDoneClick}/>
+            )}
+        </tbody>
+        ))}
+        </table>
       </form>
-
-
-      <br/>
-      <br/>
       
       <SearchComponent />
-
     </>
   );
 }
 
-export default Home
+export default Home;

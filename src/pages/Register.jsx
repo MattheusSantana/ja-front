@@ -35,7 +35,7 @@ const Card = () => {
 
     const navigateToLogin = () => {
         navigate("/")
-      }
+    }
   return (
       <>
         <div className="card">
