@@ -6,7 +6,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Card from "./components/Card";
+import Card from "./pages/Register.jsx";
 import { AuthContext, AuthenticatorProvider } from "./contexts/auth";
 import Home from "./pages/Home";
 import Login from "./pages/Login";

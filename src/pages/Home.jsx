@@ -121,7 +121,6 @@ const Home = () => {
 
     } catch (e) {
       return alert("something failed, please try again later");
-
     }
   };
 
