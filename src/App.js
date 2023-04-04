@@ -6,6 +6,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Card from "./components/Card";
 import { AuthContext, AuthenticatorProvider } from "./contexts/auth";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -35,7 +36,8 @@ function App() {
       <Router>
         <AuthenticatorProvider>
           <Routes>
-            <Route exact path="/" element={<Login />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/" element={<Card />}/>
             <Route
               exact
               path="/home"

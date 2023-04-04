@@ -142,9 +142,6 @@ const Home = () => {
 
     }
   };
-  
- 
-
 
   useEffect(() => {
     (async () => {
@@ -153,7 +150,6 @@ const Home = () => {
       setLoading(false);
     })();
   }, []);
-
 
   if(loading) {
       return <div>Loading Projects...</div>
