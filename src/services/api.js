@@ -9,12 +9,7 @@ export const loginService = async (username, password) => {
 };
 
 export const getProjects = async () => {
-    const loggedUser = localStorage.getItem('loggedUser');
-    let username;
-    if(loggedUser){
-      username = JSON.parse(loggedUser).username;
-    }
-    api.defaults.headers.username = username;
+    setUsernameHeader();
     return api.get("/projects");
 };
 
@@ -23,15 +18,23 @@ export const createProject = async (project) => {
 };
 
 export const updateProject = async (project) => {
-    const loggedUser = localStorage.getItem('loggedUser');
-    let username;
-    if(loggedUser){
-      username = JSON.parse(loggedUser).username;
-    }
-    api.defaults.headers.username = username;
+    setUsernameHeader();
     return api.put(`/projects/${project.id}`, project);
 };
 
 export const searchProjectById = async (projectId) => {
     return api.get(`/project/${projectId}`);
 };
+
+export const deleteProject = async (projectId) => {
+    return api.delete(`/projects/${projectId}`);
+};
+
+const setUsernameHeader = () => {
+    const loggedUser = localStorage.getItem('loggedUser');
+    let username;
+    if(loggedUser){
+      username = JSON.parse(loggedUser).username;
+    }
+    api.defaults.headers.username = username;
+}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import EditableRow from '../components/EditableRow.jsx';
 import ReadOnlyRow from '../components/ReadOnlyRow.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
-import { getProjects, createProject, updateProject } from '../services/api.js';
+import { getProjects, createProject, updateProject, deleteProject } from '../services/api.js';
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -106,6 +106,24 @@ const Home = () => {
   const handleCancelClick = () => {
     setEditProjectId(null);
   }
+
+  const handleDeleteClick = async (event, project) => {
+    event.preventDefault();
+
+    try {
+      const response = await deleteProject(project.id);
+      
+      if (response.status === 200) {
+        const response = await getProjects();
+        setProjects(response.data);
+        setLoading(false);
+      }
+
+    } catch (e) {
+      return alert("something failed, please try again later");
+
+    }
+  };
   
  
 
@@ -154,7 +172,7 @@ const Home = () => {
                   <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick}/>
 
                 ) : (
-                  <ReadOnlyRow project={project} handleEditClick={handleEditClick}/>
+                  <ReadOnlyRow project={project} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick}/>
                 )}
 
 
