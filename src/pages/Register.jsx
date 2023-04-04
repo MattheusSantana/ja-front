@@ -32,12 +32,16 @@ const Card = () => {
           }
         
     }
+
+    const navigateToLogin = () => {
+        navigate("/")
+      }
   return (
       <>
         <div className="card">
             <div id="card-content">
             <h2 className="title">REGISTER</h2>
-            <form onSubmit={handleFormSubmit}>
+            <form className="card-form" onSubmit={handleFormSubmit}>
                 <label>Name</label>
                 <input className="content-form" type="text" required onChange={(e) => setName(e.target.value)}/>
                 <div className="form-border"></div>
@@ -48,7 +52,8 @@ const Card = () => {
                 <input type="password" className="content-form" required onChange={(e) => setPassword(e.target.value)}/>
                 <div className='form-border'></div>
             
-                <button className="submit-btn" type="submit" name="submit">SIGN UP</button> 
+                <button className="submit-btn" type="submit" name="submit">SIGN UP</button>
+                <button className="submit-btn" onClick={navigateToLogin} style={{marginTop: "2%"}}>SIGN IN</button>
                
             </form>
             

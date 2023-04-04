@@ -2,14 +2,14 @@ body {
     display: block;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
 
 label {
     padding-top: 10%;
     font-family: sans-serif;
+}
+.card-form {
+    display: flex;
+    flex-direction: column;
 }
 
 .form-border {
@@ -43,6 +43,6 @@ label {
 }
 
 .submit-btn{
-    margin-top: 20%;
+    margin-top: 27%;
     border-radius: 21px;
 }

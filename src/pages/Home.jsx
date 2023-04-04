@@ -156,7 +156,6 @@ const Home = () => {
 
   return (
     <>
-        Home  
         <h2> Add project</h2>
         <form onSubmit={handleAddFormSubmit}>
           <input type="text" name='title' placeholder='Title' onChange={handleAddFormChange}/>
