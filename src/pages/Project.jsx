@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import '../styles/styles.css';
 import { createProject } from '../services/api.js';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+
 
 const Project = () => {
 
@@ -40,9 +42,15 @@ const Project = () => {
         
     }
 
+    const handleDataTime = (dateTime) => {
+      const newDate = moment(dateTime).format('YYYY-MM-DDTHH:mm:SS');
+      setDeadline(newDate);
+      console.log('nova', newDate);
+    };
+
     const navigateToHome = () => {
         navigate("/home")
-     }
+    };
   return (
     <>
     <div className="card">
@@ -60,7 +68,7 @@ const Project = () => {
             <div className='form-border'></div>
 
             <label>Deadline</label>
-            <input type="datetime-local" className="content-form" required onChange={(e) => setDeadline(e.target.value)}/>
+            <input type="datetime-local" className="content-form" required onChange={(e) => handleDataTime(e.target.value)}/>
             <div className='form-border'></div>
         
             <button className="submit-btn" type="submit" name="submit" style={{marginTop: "10%"}}>Register</button>

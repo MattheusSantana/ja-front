@@ -5,11 +5,8 @@ const SearchComponent = () => {
     const [searchProjectId, setSearchProjectId] = useState(null);
     const [project, setProject ] = useState(null); 
 
-
-
     const handleSearchProjectById = async (event) => {
         event.preventDefault();
-        
     
         try {
           const response = await searchProjectById(searchProjectId);
@@ -27,12 +24,8 @@ const SearchComponent = () => {
         setProject(null);
     }
 
-
-
   return (
     <form onSubmit={handleSearchProjectById}>
-
-        
     <h2>Search project</h2>
     <div>
       <input type="text" name='searchProjectId' placeholder='enter project id' onChange={(e) => setSearchProjectId(e.target.value)}/>

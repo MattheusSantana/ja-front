@@ -5,6 +5,7 @@ import EditableRow from '../components/EditableRow.jsx';
 import ReadOnlyRow from '../components/ReadOnlyRow.jsx';
 import SearchComponent from '../components/SearchComponent.jsx';
 import { getProjects, createProject, updateProject, deleteProject, doneProject } from '../services/api.js';
+import moment from 'moment';
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -85,24 +86,28 @@ const Home = () => {
     }
   };
 
+  const handleDataTime = (dateTime) => {
+    const newDate = moment(dateTime).format('YYYY-MM-DDTHH:mm:SS');
+    console.log('nova', newDate);
+    return newDate;
+  };
+
   const handleEditFormSubmit = async (event) => {
     event.preventDefault();
-
+    const deadline = handleDataTime(editFormData.deadline);
     const editedProject = {
       title: editFormData.title,
       zip_code: editFormData.zip_code,
       cost: editFormData.cost,
-      deadline: editFormData.deadline,
+      deadline: deadline,
       id: editProjectId,
     }
 
     const response = await updateProject(editedProject);
 
     if(response.status === 201){
-      const response = await getProjects();
-      setProjects(response.data);
-      setLoading(false);
       handleCancelClick();
+      window.location.reload(true);
     }
   }
 
@@ -117,9 +122,8 @@ const Home = () => {
       const response = await deleteProject(project.id);
       
       if (response.status === 200) {
-        const response = await getProjects();
-        setProjects(response.data);
         setLoading(false);
+        window.location.reload(true);
       }
 
     } catch (e) {
@@ -134,9 +138,8 @@ const Home = () => {
       const response = await doneProject(project.id);
       
       if (response.status === 201) {
-        const response = await getProjects();
-        setProjects(response.data);
         setLoading(false);
+        window.location.reload(true);
       }
 
     } catch (e) {
@@ -145,10 +148,21 @@ const Home = () => {
     }
   };
 
+  const handleDeadline = (projects) => {
+      const newProjects = projects.map(project => {
+      project.deadline = moment(project.deadline).format("YYYY-MM-DD HH:mm:ss");
+      return project
+    });
+    return newProjects;
+  }
+
   useEffect(() => {
     (async () => {
       const response = await getProjects();
-      setProjects(response.data);
+      const projects = handleDeadline(response.data)
+      
+
+      setProjects(projects);
       setLoading(false);
     })();
   }, []);
