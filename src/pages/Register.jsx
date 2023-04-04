@@ -36,11 +36,11 @@ const Card = () => {
       <>
         <div className="card">
             <div id="card-content">
-                <h2 className="title">REGISTER</h2>
+            <h2 className="title">REGISTER</h2>
             <form onSubmit={handleFormSubmit}>
                 <label>Name</label>
                 <input className="content-form" type="text" required onChange={(e) => setName(e.target.value)}/>
-                <div className='form-border'></div>
+                <div className="form-border"></div>
                 <label>Username</label>
                 <input type="text" className="content-form" required onChange={(e) => setUsername(e.target.value)}/>
                 <div className='form-border'></div>
