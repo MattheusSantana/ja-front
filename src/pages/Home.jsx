@@ -40,16 +40,6 @@ const Home = () => {
 
   };
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = {...addFormData};
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
   
   const handleEditClick = (event, project) => {
     event.preventDefault();
@@ -66,25 +56,6 @@ const Home = () => {
 
       setEditFormData(formValues);
   }
-
-  const handleAddFormSubmit = async (event) => {
-    event.preventDefault();
-    const user = JSON.parse(localStorage.getItem('loggedUser'));
-    const newProject = {
-      title: addFormData.title,
-      zip_code: addFormData.zip_code,
-      cost: addFormData.cost,
-      deadline: addFormData.deadline,
-      username: user.username
-    };
-    const response = await createProject(newProject);
-
-    if(response.status === 201){
-      const response = await getProjects();
-      setProjects(response.data);
-      setLoading(false);
-    }
-  };
 
   const handleDataTime = (dateTime) => {
     const newDate = moment(dateTime).format('YYYY-MM-DDTHH:mm:SS');
@@ -179,7 +150,6 @@ const Home = () => {
     <>
       <div style={{float: "right"}}>
         <button onClick={navigateToCreateProject}>New</button>
-        <button >search</button>
       </div>
       <form onSubmit={handleEditFormSubmit}>
        <table>
