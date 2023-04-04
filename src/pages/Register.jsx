@@ -19,7 +19,7 @@ const Card = () => {
             if (response.status === 201 ) {
                 console.log(response);
                 alert(response.data.message);   
-                return navigate("/login"); 
+                return navigate("/"); 
             }
             
         } catch (error) {
